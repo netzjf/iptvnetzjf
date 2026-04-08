@@ -30,29 +30,6 @@ export interface EpgPwChannel {
   id: string;
   name: string;
 }
-
-export interface PWEpgJson {
-  end_date: string;
-  name: string;
-  info_url: string;
-  country: string;
-  description: string | null;
-  error_message: string;
-  provider: string;
-  source_url: string;
-  offset: string;
-  timezone: string;
-  error_code: number;
-  start_date: string;
-  icon: string;
-  epg_list: PWEpgProgrammeItem[];
-}
-
-export interface PWEpgProgrammeItem {
-  desc: string;
-  start_date: string;
-  title: string;
-}
 /**
  * 从 epg.pw 频道列表页 HTML 中提取频道 ID 与名称
  * 链接格式: href="/last/464609.html?lang=zh-hans"
@@ -93,7 +70,7 @@ async function fetchChannelEpg(channelId: string, date: string): Promise<string 
   }
 }
 
-function channelIdFromNode(node: EpgPwChannelNode): string | null {
+function channelIdFromNode(node: XmltvChannelNode): string | null {
   return readXmlAttr(node, 'id') || null;
 }
 
@@ -101,8 +78,8 @@ function channelIdFromNode(node: EpgPwChannelNode): string | null {
  * 解析单份 epg.pw API 返回的 XMLTV 片段
  */
 export function parsePwEpgXml(xml: string): {
-  channels: EpgPwChannelNode[];
-  programmes: EpgPwProgrammeNode[];
+  channels: XmltvChannelNode[];
+  programmes: XmltvProgrammeNode[];
 } {
   const tv = parseXmltvRoot(xml) as XmltvNode | null;
   if (!tv) {
@@ -115,8 +92,8 @@ export function parsePwEpgXml(xml: string): {
 }
 
 export function buildPwChannelJson(
-  channelNode: EpgPwChannelNode | undefined,
-  programmes: EpgPwProgrammeNode[]
+  channelNode: XmltvChannelNode | undefined,
+  programmes: XmltvProgrammeNode[]
 ): EpgChannelJson {
   const channel = readXmltvChannelName(channelNode).toLowerCase();
 
@@ -170,8 +147,8 @@ export async function buildEpgPwXml(batchSize = 10, delayMs = 300): Promise<stri
   }
 
   const seenChannelIds = new Set<string>();
-  const channelNodes: EpgPwChannelNode[] = [];
-  const programmeNodes: EpgPwProgrammeNode[] = [];
+  const channelNodes: XmltvChannelNode[] = [];
+  const programmeNodes: XmltvProgrammeNode[] = [];
   // const epgDir = makeEpgDir();
   const basePath = path.join(__dirname, '../../m3u/epg/pw-7');
 
