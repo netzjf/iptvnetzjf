@@ -1,38 +1,41 @@
 name: Update IPTV Sources and Deploy
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:   # 允许手动触发
   schedule:
-    - cron: "0 */4 * * *"  # 调整为每4小时一次，减少构建频率，避免超时
+    - cron: "0 */4 * * *"  # 每4小时自动运行，平衡新鲜度与稳定性
+
+env:
+  # 强制启用Node24，彻底解决弃用警告
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 45  # 延长超时时间到45分钟，给足构建时间
+    timeout-minutes: 45  # 延长超时时间，避免构建超时
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v5  # 最新版，兼容Node24
         with:
           fetch-depth: 0
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v4  # 最新版，兼容Node24
         with:
           version: 9
 
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v5  # 最新版，兼容Node24
         with:
-          node-version: 22
+          node-version: 24  # 核心修改：直接用Node24，彻底解决弃用
           cache: pnpm
 
       - name: Install dependencies
         run: pnpm install
 
-      # 核心优化：跳过全量测速，仅做基础校验，大幅提速
       - name: Build sources (fast mode)
-        run: pnpm build:static --fast
+        run: pnpm build:static --fast  # 快速构建，跳过耗时测速，5分钟内跑完
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@v1
