@@ -40,4 +40,4 @@ export const sources = [
   // ...zbds_sources,
   ...hotel_tvn_sources,
 ];
-import my_multi_sub from 'AInet.ts'
+import Ainet from 'AInet.ts'
