@@ -1,4 +1,5 @@
 export * from './epg_pw';
+// 全部屏蔽垃圾乱源
 // export * from './iptv_org';
 // export * from './yang_m3u';
 // export * from './yuechan_live';
@@ -10,24 +11,26 @@ export * from './youhun';
 // export * from './zbds';
 // export * from './hotel_tvn';
 export * from './utils';
+// 只导出你的凤凰频道
 export * from './fenghuang';
-export * from './Ainet';
+
 
 import {
   epg_pw_sources,
   youhun_sources,
 } from '.';
 
+// 只导入你存在的凤凰频道文件
 import fenghuang_sources from './fenghuang.ts';
-import Ainet_sources from './Ainet.ts';
+
 
 export const sources = [
-  ...fenghuang_sources,
+  ...fenghuang_sources, // 凤凰频道永远全集第一位
   ...epg_pw_sources,
-  ...Ainet_sources,
   ...youhun_sources,
 ];
 
+// 保留你原来全部高清/延迟排序/过滤规则
 export const detectionConfig = {
   enable: true,
   timeout: 8000,
