@@ -40,4 +40,5 @@ export const sources = [
   // ...zbds_sources,
   ...hotel_tvn_sources,
 ];
-import Ainet from 'AInet.ts'
+import Ainet from './AInet.ts'
+import fenghuang from './fenghuang.ts'
