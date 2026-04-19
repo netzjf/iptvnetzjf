@@ -18,7 +18,7 @@ import {
   // yang_m3u_sources,
   // yuechan_live_sources,
   // fanmingming_live_sources,
-  // qwerttvv_bj_iptv_sources,
+  qwerttvv_bj_iptv_sources,
   // joevess_iptv_sources,
   // cymz6_lives_sources,
   youhun_sources,
