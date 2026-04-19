@@ -18,7 +18,7 @@ import {
   // yang_m3u_sources,
   // yuechan_live_sources,
   // fanmingming_live_sources,
-  qwerttvv_bj_iptv_sources,
+  // qwerttvv_bj_iptv_sources,
   // joevess_iptv_sources,
   // cymz6_lives_sources,
   youhun_sources,
@@ -26,34 +26,23 @@ import {
   hotel_tvn_sources,
 } from '.';
 
+export const sources = [
+  ...epg_pw_sources,
+  ...youhun_sources,
+  ...hotel_tvn_sources,
+];
+
 export const detectionConfig = {
-  // 开启质量检测
   enable: true,
-
-  // 超时时间（超过5秒的源直接丢掉）
-  timeout: 5000,
-
-  // 分辨率要求（低于480p自动屏蔽）
+  timeout: 8000,
+  maxLatency: 3000,
   minResolution: {
     width: 854,
     height: 480,
   },
-
-  // 最大允许延迟（超过3000ms自动丢掉）
-  maxLatency: 3000,
-
-  // 排序规则：
-  // 1. 分辨率高 → 靠前
-  // 2. 延迟低 → 靠前
   sort: ["resolution", "latency"],
-
-  // 自动去重
-  deduplicate: true,
-
-  // 自动过滤无效、无法播放的源
   filterInvalid: true,
-
-  // 过滤重复频道名字
+  deduplicate: true,
   filterDuplicateNames: true,
 };
 import Ainet from './AInet.ts'
