@@ -11,7 +11,7 @@ export * from './youhun';
 // export * from './zbds';
 // export * from './hotel_tvn';
 export * from './utils';
-// 只导出你的凤凰频道
+// 只导出凤凰，彻底删除Ainet！！！
 export * from './fenghuang';
 
 
@@ -20,17 +20,15 @@ import {
   youhun_sources,
 } from '.';
 
-// 只导入你存在的凤凰频道文件
 import fenghuang_sources from './fenghuang.ts';
 
 
 export const sources = [
-  ...fenghuang_sources, // 凤凰频道永远全集第一位
+  ...fenghuang_sources,
   ...epg_pw_sources,
   ...youhun_sources,
 ];
 
-// 保留你原来全部高清/延迟排序/过滤规则
 export const detectionConfig = {
   enable: true,
   timeout: 8000,
