@@ -1,0 +1,10 @@
+export default [
+  { name: "凤凰中文", url: "http://cdn6.163189.xyz/163189/fhzw", type: "channel" },
+  { name: "凤凰资讯", url: "http://cdn6.163189.xyz/163189/fhzx", type: "channel" },
+  { name: "凤凰电影", url: "http://cdn6.163189.xyz/163189/fhdianying", type: "channel" },
+  { name: "凤凰卫视", url: "http://cdn6.163189.xyz/163189/fhtv", type: "channel" },
+  { name: "凤凰香港", url: "http://cdn6.163189.xyz/163189/fhkg", type: "channel" },
+  { name: "凤凰资讯", url: "http://fhx.netzjf2.eu.cc/fhzx", type: "channel" },
+  { name: "凤凰中文", url: "http://fhx.netzjf2.eu.cc/fhzw", type: "channel" },
+  { name: "凤凰香港", url: "http://fhx.netzjf2.eu.cc/fhhk", type: "channel" }
+]
